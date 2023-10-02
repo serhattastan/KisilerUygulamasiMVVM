@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import com.example.kisileruygulamasi.R
+import com.example.kisileruygulamasi.data.entity.Kisiler
 import com.example.kisileruygulamasi.databinding.FragmentAnasayfaBinding
 
 
@@ -16,6 +18,17 @@ class AnasayfaFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         binding = FragmentAnasayfaBinding.inflate(inflater, container, false)
+
+        binding.fab.setOnClickListener {
+            Navigation.findNavController(it).navigate(R.id.action_anasayfaFragment_to_kisiKayitFragment)
+        }
+
+        binding.button.setOnClickListener {
+            val kisi = Kisiler(1,"Ahmet","1111")
+            val gecis = AnasayfaFragmentDirections.actionAnasayfaFragmentToKisiDetayFragment(kisi = kisi)
+            Navigation.findNavController(it).navigate(gecis)
+        }
+
         return binding.root
     }
 
