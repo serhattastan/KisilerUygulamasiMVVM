@@ -4,8 +4,10 @@ import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
+import com.example.kisileruygulamasi.R
 import com.example.kisileruygulamasi.data.entity.Kisiler
 import com.example.kisileruygulamasi.databinding.CardTasarimBinding
 import com.example.kisileruygulamasi.databinding.FragmentAnasayfaBinding
@@ -17,7 +19,7 @@ class KisilerAdapter(var mContext : Context, var kisilerListesi : List<Kisiler>)
     inner class CardTasarimHolder(var tasarim : CardTasarimBinding) : RecyclerView.ViewHolder(tasarim.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardTasarimHolder {
-        val binding = CardTasarimBinding.inflate(LayoutInflater.from(mContext), parent, false)
+        val binding : CardTasarimBinding = DataBindingUtil.inflate(LayoutInflater.from(mContext),R.layout.card_tasarim, parent, false)
         return CardTasarimHolder(binding)
     }
 
@@ -26,8 +28,7 @@ class KisilerAdapter(var mContext : Context, var kisilerListesi : List<Kisiler>)
         val kisi = kisilerListesi.get(position)
         val t = holder.tasarim
 
-        t.textViewKisiAd.text = kisi.kisi_ad
-        t.textViewKisiTel.text = kisi.kisi_tel
+        t.kisiNesnesi = kisi
 
         t.cardViewSatir.setOnClickListener{
             val gecis = AnasayfaFragmentDirections.actionAnasayfaFragmentToKisiDetayFragment(kisi = kisi)

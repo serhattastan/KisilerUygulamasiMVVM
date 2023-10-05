@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView.OnQueryTextListener
 import androidx.appcompat.widget.SearchView
+import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -23,7 +24,9 @@ class AnasayfaFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        binding = FragmentAnasayfaBinding.inflate(inflater, container, false)
+        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_anasayfa, container, false)
+        binding.anasayfaFragment = this
+        binding.anasayfaToolbarBaslik = "Kişiler"
 
         binding.toolbarAnasayfa.title = "Kişiler"
 
@@ -32,7 +35,7 @@ class AnasayfaFragment : Fragment() {
         //RecyclerView
 
         //Linear Görünüm
-        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        //binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         //Kutucuklu Görünüm
         //binding.recyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
@@ -49,14 +52,7 @@ class AnasayfaFragment : Fragment() {
         kisilerListesi.add(k4)
 
         val kisilerAdapter = KisilerAdapter(requireContext(), kisilerListesi)
-        binding.recyclerView.adapter = kisilerAdapter
-
-
-
-        //Fab Button
-        binding.fab.setOnClickListener {
-            Navigation.findNavController(it).navigate(R.id.action_anasayfaFragment_to_kisiKayitFragment)
-        }
+        binding.kisilerAdapter = kisilerAdapter
 
         binding.searchView.setOnQueryTextListener(object : OnQueryTextListener{
             override fun onQueryTextChange(newText: String): Boolean {
@@ -71,6 +67,9 @@ class AnasayfaFragment : Fragment() {
         })
 
         return binding.root
+    }
+    fun fabTilka(it : View){
+        Navigation.findNavController(it).navigate(R.id.action_anasayfaFragment_to_kisiKayitFragment)
     }
 
     fun ara(aramaKelimesi : String){
