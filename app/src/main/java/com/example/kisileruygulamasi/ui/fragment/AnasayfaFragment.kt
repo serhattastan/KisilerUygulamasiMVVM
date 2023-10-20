@@ -20,8 +20,9 @@ import com.example.kisileruygulamasi.databinding.FragmentAnasayfaBinding
 import com.example.kisileruygulamasi.ui.adapter.KisilerAdapter
 import com.example.kisileruygulamasi.ui.viewmodel.AnasayfaViewModel
 import com.example.kisileruygulamasi.ui.viewmodel.KisiDetayViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class AnasayfaFragment : Fragment() {
     private lateinit var binding: FragmentAnasayfaBinding
     private lateinit var viewModel: AnasayfaViewModel
